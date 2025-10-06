@@ -1,0 +1,25 @@
+# Dockerfile para desenvolvimento
+FROM node:22-alpine
+
+WORKDIR /app
+
+# Instalar dependências do sistema
+RUN apk add --no-cache libc6-compat
+
+# Copiar arquivos de dependências
+COPY package.json yarn.lock* package-lock.json* pnpm-lock.yaml* ./
+
+# Instalar dependências
+RUN \
+  if [ -f yarn.lock ]; then yarn --frozen-lockfile; \
+  elif [ -f package-lock.json ]; then npm ci; \
+  elif [ -f pnpm-lock.yaml ]; then yarn global add pnpm && pnpm i --frozen-lockfile; \
+  else echo "Lockfile not found." && exit 1; \
+  fi
+
+# Copiar código fonte
+COPY . .
+
+# Expor porta
+EXPOSE 3000
+

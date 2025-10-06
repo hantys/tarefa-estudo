@@ -11,8 +11,9 @@ export default function Home() {
             src="/assets/hero.png"
             alt="Hero Image"
             priority
-            width={100}
-            height={100}
+            width={500}
+            height={400}
+            unoptimized
           />
         </div>
       </main>
