@@ -8,7 +8,7 @@ export const metadata = {
 
 export default function Home() {
   return (
-    <>
+    <div className="container">
       <main className="main">
         <div className="logoContent">
           <Image
@@ -34,6 +34,6 @@ export default function Home() {
           <span>+90 comentários</span>
         </section>
       </div>
-    </>
+    </div>
   );
 }

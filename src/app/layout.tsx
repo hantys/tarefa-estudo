@@ -13,9 +13,7 @@ export default function RootLayout({
       <body>
         <SessionProviderWrapper>
           <Header />
-          <div className="container">
-            {children}
-          </div>
+          {children}
         </SessionProviderWrapper>
       </body>
     </html>
