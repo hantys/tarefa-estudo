@@ -190,7 +190,7 @@ def fit_and_rank(frame: pd.DataFrame, df: pd.DataFrame):
     current["rank"] = np.arange(1, len(current) + 1)
     return model, current
 
-def generate_games(ranking: pd.DataFrame, n_games: int, seed: int,
+def generate_games(ranking: pd.DataFrame, n_games: int, seed: int | None,
                    temperature: float = 1.0, uniform_blend: float = 0.20):
     rng = np.random.default_rng(seed)
     numbers = ranking["number"].to_numpy(dtype=int)
@@ -229,7 +229,7 @@ def parse_args() -> argparse.Namespace:
     source.add_argument("--csv")
     source.add_argument("--url")
     parser.add_argument("--games", type=int, default=20)
-    parser.add_argument("--seed", type=int, default=42)
+    parser.add_argument("--seed", type=int, default=None, help="Seed opcional. Sem informar, os jogos variam a cada execução.")
     parser.add_argument("--temperature", type=float, default=1.0)
     parser.add_argument("--uniform-blend", type=float, default=0.20)
     parser.add_argument("--output", default="output")
