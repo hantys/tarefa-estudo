@@ -24,18 +24,6 @@ A finalidade deste projeto é testar objetivamente se frequência, atraso e outr
 
 Não trate o resultado como garantia de ganho.
 
-## Formato do CSV
-
-O arquivo precisa ter:
-
-```csv
-concurso,data,n1,n2,n3,n4,n5,n6
-1,11/03/1996,4,5,30,33,41,52
-2,18/03/1996,9,37,39,41,43,49
-```
-
-A coluna `data` é opcional. Os nomes `bola1..bola6` e `dezena1..dezena6` também são reconhecidos.
-
 ## Instalação
 
 ```bash
@@ -45,7 +33,50 @@ source .venv/bin/activate
 pip install -r requirements.txt
 ```
 
-## Executar com CSV local
+## Atualizar o histórico automaticamente
+
+Execute:
+
+```bash
+make atualizar
+```
+
+Isso baixa o histórico completo atualizado e cria:
+
+```
+resultados.csv
+```
+
+O comando usa a base pública do projeto `AlceuPantoni/loterrrias`, que é atualizada automaticamente via GitHub Actions.
+
+Também é possível executar diretamente:
+
+```bash
+python update_results.py
+```
+
+## Atualizar e gerar 20 jogos em um único comando
+
+```bash
+make gerar
+```
+
+Esse comando equivale a:
+
+```bash
+python update_results.py
+python main.py --csv resultados.csv --games 20
+```
+
+## Formato gerado
+
+```csv
+concurso,data,n1,n2,n3,n4,n5,n6
+1,1996-03-11,4,5,30,33,41,52
+2,1996-03-18,9,37,39,41,43,49
+```
+
+## Executar manualmente
 
 ```bash
 python main.py --csv resultados.csv
@@ -56,21 +87,6 @@ Gerar 50 jogos:
 ```bash
 python main.py --csv resultados.csv --games 50
 ```
-
-## Executar com CSV por URL
-
-```bash
-python main.py --url "https://exemplo.com/resultados.csv"
-```
-
-Existe um CSV público para testes neste projeto de terceiros:
-
-```bash
-python main.py \
-  --url "https://raw.githubusercontent.com/rianbrrs/mega-gen/main/historico_megasena.csv"
-```
-
-Esse arquivo é apenas uma fonte de demonstração e pode estar desatualizado. Para prever o próximo concurso, use um histórico atualizado.
 
 ## Saída
 
